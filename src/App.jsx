@@ -32,10 +32,10 @@ function App() {
           </Route>
       </Routes>
       <Toaster 
-        position="top-right" 
+        position="bottom-right" 
         expand={false} 
         toastOptions={{
-          // theme: "dark",
+          theme: "dark",
           className: 'my-toast',
         }}
       />

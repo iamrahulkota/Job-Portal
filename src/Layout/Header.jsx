@@ -2,8 +2,19 @@ import React from 'react'
 import Spline from '@splinetool/react-spline';
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
+import { Navigate, useNavigate } from 'react-router-dom';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 
 function Header() {
+
+    const navigate = useNavigate();
+
+
+    function handleLogin() {
+        console.log("Login Button Clicked")
+        toast.success("Login Button Clicked")
+    }
+
   return (
     <div className='w-100'>
         {/* <Button 
@@ -22,7 +33,28 @@ function Header() {
         <div className='absolute w-40 bottom-5 left-100 right-5 h-10 bg-[#020817]' /> 
       </div> */}
 
-      Header
+      <div className='flex justify-between py-5 border border-white'>
+            {/* <h1 className='text-2xl'>Work Wire</h1> */}
+            <Button 
+                variant="link" 
+                onClick={() => navigate('/')}
+                className="text-xl font-normal"
+            >
+                Work Wire
+            </Button>
+            {/* <Button 
+                variant="outline" 
+                onClick={handleLogin}
+            >
+                Log in
+            </Button> */}
+            <SignedOut>
+                <SignInButton />
+            </SignedOut>
+            <SignedIn>
+                <UserButton />
+            </SignedIn>
+      </div>
     </div>
   )
 }
