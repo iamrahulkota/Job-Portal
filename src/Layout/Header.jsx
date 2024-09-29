@@ -1,18 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Spline from '@splinetool/react-spline';
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
-import { Navigate, useNavigate } from 'react-router-dom';
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
+import { SignedIn, SignedOut, SignIn, SignInButton, UserButton } from '@clerk/clerk-react';
+import { Briefcase, BriefcaseBusiness, Heart, PenBox } from 'lucide-react';
 
 function Header() {
 
     const navigate = useNavigate();
+    const [search, setSearch] = useSearchParams();
+
+    const [showSignIn, setShowSignIn] = useState(false);
 
 
     function handleLogin() {
-        console.log("Login Button Clicked")
-        toast.success("Login Button Clicked")
+        // console.log("Login Button Clicked")
+        // toast.success("Login Button Clicked")
+        setShowSignIn(true);
+    }
+
+    function handlePostJob() {
+        // console.log("PostJob Button Clicked")
+        // toast.success("PostJob Button Clicked")
+        navigate('/postjob')
+    }
+
+    useEffect(()=>{
+        if(search.get('sigin-in')) {
+            setShowSignIn(true)
+        }
+    },[search])
+
+    function handleOverlayClick(e) {
+        if (e.target === e.currentTarget)
+        setShowSignIn(false)
+        setSearch({})
     }
 
   return (
@@ -42,19 +65,63 @@ function Header() {
             >
                 Work Wire
             </Button>
-            <Button 
-                variant="outline" 
-                onClick={handleLogin}
-            >
-                Log in
-            </Button>
-            {/* <SignedOut>
-                <SignInButton />
-            </SignedOut>
-            <SignedIn>
-                <UserButton />
-            </SignedIn> */}
+            
+            <div className='flex gap-1 md:gap-4'>
+                
+
+                <SignedOut>
+                    <Button 
+                        variant="outline" 
+                        onClick={handleLogin}
+                    >
+                        Log in
+                    </Button>
+                </SignedOut>
+                <SignedIn>
+                    {/* When the user is SignedOut/NotLoginedIn, we are showing the Login Button */}
+                    <Button 
+                        variant="ghost" 
+                        onClick={handlePostJob}
+                    >
+                        <PenBox size={20} className='m-0 md:mr-2'/>
+                        <span className='hidden md:block'>Post a Job</span>
+                    </Button>
+                    <UserButton appearance={{
+                        elements : {
+                            avatarBox: "w-10 h-10",
+                        },
+                    }}>
+                        <UserButton.MenuItems>
+                            <UserButton.Link 
+                                label='My Jobs'
+                                labelIcon={<BriefcaseBusiness size={15} />}
+                                href='/myjobs'
+                            />
+                        </UserButton.MenuItems>
+                        <UserButton.MenuItems>
+                            <UserButton.Link 
+                                label='Saved Jobs'
+                                labelIcon={<Heart size={15} />}
+                                href='/savedjobs'
+                            />
+                        </UserButton.MenuItems>
+                    </UserButton>
+                </SignedIn>
+
+            </div>
       </div>
+      {showSignIn && (
+        <div 
+            className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50'
+            onClick={handleOverlayClick}
+        >
+            <SignIn
+                signUpForceRedirectUrl='/onboarding'
+                fallbackRedirectUrl='/onboarding'
+            >
+            </SignIn>
+        </div>
+      )}
     </div>
   )
 }
