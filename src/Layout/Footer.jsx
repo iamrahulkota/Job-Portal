@@ -16,7 +16,7 @@ function Footer() {
   return (
     <div className='w-100'>
 
-      <div className='flex justify-between py-5 border border-white'>
+      <div className='flex justify-between py-5'>
             {/* <h1 className='text-2xl'>Work Wire</h1> */}
             <Button 
                 variant="link" 

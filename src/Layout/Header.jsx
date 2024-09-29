@@ -33,7 +33,7 @@ function Header() {
         <div className='absolute w-40 bottom-5 left-100 right-5 h-10 bg-[#020817]' /> 
       </div> */}
 
-      <div className='flex justify-between py-5 border border-white'>
+      <div className='flex justify-between py-5'>
             {/* <h1 className='text-2xl'>Work Wire</h1> */}
             <Button 
                 variant="link" 
@@ -42,18 +42,18 @@ function Header() {
             >
                 Work Wire
             </Button>
-            {/* <Button 
+            <Button 
                 variant="outline" 
                 onClick={handleLogin}
             >
                 Log in
-            </Button> */}
-            <SignedOut>
+            </Button>
+            {/* <SignedOut>
                 <SignInButton />
             </SignedOut>
             <SignedIn>
                 <UserButton />
-            </SignedIn>
+            </SignedIn> */}
       </div>
     </div>
   )
