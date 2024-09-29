@@ -27,7 +27,7 @@ function Header() {
     }
 
     useEffect(()=>{
-        if(search.get('sigin-in')) {
+        if(search.get('sign-in')) {
             setShowSignIn(true)
         }
     },[search])
@@ -70,6 +70,7 @@ function Header() {
                 
 
                 <SignedOut>
+                    {/* When the user is SignedOut/NotLoginedIn, we are showing the Login Button */}
                     <Button 
                         variant="outline" 
                         onClick={handleLogin}
@@ -78,7 +79,6 @@ function Header() {
                     </Button>
                 </SignedOut>
                 <SignedIn>
-                    {/* When the user is SignedOut/NotLoginedIn, we are showing the Login Button */}
                     <Button 
                         variant="ghost" 
                         onClick={handlePostJob}

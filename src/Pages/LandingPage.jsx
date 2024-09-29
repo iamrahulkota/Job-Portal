@@ -88,15 +88,15 @@ const faqs = [
   }
 ]
 
-console.log(companies)
+// console.log(companies)
 
   function handleFindJobs() {
-    console.log("handleFindJobs")
+    // console.log("handleFindJobs")
     navigator('/jobs')
   }
 
   function handlePostJob() {
-    console.log("handlePostJob")
+    // console.log("handlePostJob")
     navigator('/postjob')
   }
 
@@ -172,7 +172,7 @@ console.log(companies)
               ))}
           </Accordion>
         </div>
-        
+
     </div>
   )
 }

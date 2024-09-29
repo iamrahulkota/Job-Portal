@@ -14,6 +14,7 @@ import PostJobPage from "./Pages/PostJobPage"
 import SavedJobsPage from "./Pages/SavedJobsPage"
 import MyJobs from "./Pages/MyJobs"
 import LandingPage from "./Pages/LandingPage"
+import ProtectedRoute from "./ProtectedRoute"
 
 function App() {
 
@@ -23,12 +24,12 @@ function App() {
       <Routes>
           <Route element={<Homelayout />} >
             <Route path="/" element={<LandingPage />} />
-            <Route path="/onboarding" element={<OnBoardingpage />} />
-            <Route path="/jobs" element={<JobListingPage />} />
-            <Route path="/job/:id" element={<JobPage />} />
-            <Route path="/postjob" element={<PostJobPage />} />
-            <Route path="/savedjobs" element={<SavedJobsPage />} />
-            <Route path="/myjobs" element={<MyJobs />} />
+            <Route path="/onboarding" element={<ProtectedRoute><OnBoardingpage /></ProtectedRoute>} />
+            <Route path="/jobs" element={<ProtectedRoute><JobListingPage /></ProtectedRoute>} />
+            <Route path="/job/:id" element={<ProtectedRoute><JobPage /></ProtectedRoute>} />
+            <Route path="/postjob" element={<ProtectedRoute><PostJobPage /></ProtectedRoute>} />
+            <Route path="/savedjobs" element={<ProtectedRoute><SavedJobsPage /></ProtectedRoute>} />
+            <Route path="/myjobs" element={<ProtectedRoute><MyJobs /></ProtectedRoute>} />
           </Route>
       </Routes>
       <Toaster 
