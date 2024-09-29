@@ -3,11 +3,12 @@ import Spline from '@splinetool/react-spline';
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
-import { SignedIn, SignedOut, SignIn, SignInButton, UserButton } from '@clerk/clerk-react';
+import { SignedIn, SignedOut, SignIn, SignInButton, UserButton, useUser } from '@clerk/clerk-react';
 import { Briefcase, BriefcaseBusiness, Heart, PenBox } from 'lucide-react';
 
 function Header() {
 
+    const { user } = useUser();
     const navigate = useNavigate();
     const [search, setSearch] = useSearchParams();
 
@@ -79,13 +80,16 @@ function Header() {
                     </Button>
                 </SignedOut>
                 <SignedIn>
-                    <Button 
-                        variant="ghost" 
-                        onClick={handlePostJob}
-                    >
-                        <PenBox size={20} className='m-0 md:mr-2'/>
-                        <span className='hidden md:block'>Post a Job</span>
-                    </Button>
+                    {user?.unsafeMetadata?.role === "recruiter" && (
+                        <Button 
+                            variant="ghost" 
+                            onClick={handlePostJob}
+                        >
+                            <PenBox size={20} className='m-0 md:mr-2'/>
+                            <span className='hidden md:block'>Post a Job</span>
+                        </Button>
+                    )}
+                    
                     <UserButton appearance={{
                         elements : {
                             avatarBox: "w-10 h-10",

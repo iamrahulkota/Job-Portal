@@ -8,5 +8,5 @@
 ```
 
 ```
-    npm i 'react-router-dom' @clerk/clerk-react @clerk/themes embla-carousel-autoplay 
+    npm i 'react-router-dom' @clerk/clerk-react @clerk/themes embla-carousel-autoplay react-spinners
 ```

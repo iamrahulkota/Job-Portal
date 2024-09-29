@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+import { toast } from "sonner";
 
 const ProtectedRoute = ({ children }) => {
   const { isSignedIn, isLoaded, user } = useUser();
@@ -11,13 +12,11 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/?sign-in=true" />;
   }
 
-  if (
-    user !== undefined &&
-    !user?.unsafeMetadata?.role &&
-    pathname !== "/onboarding"
-  )
+  // Checking OnBoarding Page auth
+  if ( user !== undefined && !user?.unsafeMetadata?.role && pathname !== "/onboarding") {
+    toast.warning("On Borading Important")
     return <Navigate to="/onboarding" />;
-
+  }
   return children;
 };
 
